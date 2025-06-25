@@ -1,0 +1,301 @@
+{
+        title: "Sound Vision",
+        description: "Emotion-based image generation using voice input.",
+        thumbnail: "https://raw.githubusercontent.com/JustCool0208/soundvision/main/demo.png",
+        tryLink: "https://github.com/JustCool0208/soundvision",
+        readmeLink: "https://github.com/JustCool0208/soundvision#readme"
+      }<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rohith's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+    html, body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    body {
+      position: relative;
+      color: #f5f5f5;
+      padding: 2rem;
+      background-color: #111;
+    }
+    .bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+      filter: brightness(0.4) contrast(1.1);
+    }
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(90deg, #c2e9fb, #a1c4fd);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientFlow 8s ease infinite alternate;
+    }
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+    .typing-effect {
+      font-size: 2.5rem;
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid white;
+      width: 0;
+      animation: typing 2.5s steps(20, end) forwards, blink 0.75s step-end infinite;
+      background: linear-gradient(to right, #55f788, #0b865b, #a0f43f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink {
+      0%, 100% { border-color: transparent }
+      50% { border-color: white }
+    }
+    header p {
+      font-size: 1.25rem;
+      color: #f0f0f0;
+      font-weight: 300;
+      text-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+    }
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .controls input[type="text"] {
+      padding: 0.5rem 1rem;
+      width: 250px;
+      border-radius: 5px;
+      border: 1px solid #555;
+      background: #222;
+      color: #fff;
+    }
+    .controls button {
+      padding: 0.5rem 1rem;
+      background-color: #333;
+      color: #fff;
+      border: 1px solid #555;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .controls button:hover {
+      background-color: #555;
+    }
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #333;
+      border: none;
+      padding: 0.6rem 1rem;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      width: 100%;
+    }
+    #project-container {
+      width: 100%;
+      overflow: visible;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 1.2rem;
+      padding: 1.2rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(10px);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 30px rgba(0,0,0,0.5);
+    }
+    .card img {
+      border-radius: 1rem;
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+    .card h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.4rem;
+      color: #ffffff;
+    }
+    .card p {
+      font-size: 0.95rem;
+      color: #dddddd;
+      margin-bottom: 1rem;
+    }
+    .buttons {
+      display: flex;
+      gap: 0.6rem;
+    }
+    .buttons a {
+      flex: 1;
+      text-align: center;
+      text-decoration: none;
+      background: #66bb6a;
+      color: white;
+      padding: 0.6rem;
+      border-radius: 0.5rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .buttons a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 12px rgba(0,0,0,0.4);
+    }
+    footer {
+      margin-top: 4rem;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <video autoplay muted loop playsinline class="bg-video">
+    <source src="216134_tiny.mp4" type="video/mp4">
+  </video>
+
+  <button class="theme-toggle" onclick="toggleTheme()">🌗 Theme</button>
+
+  <header data-aos="fade-down">
+    <h1 class="typing-effect">Hey, I'm Rohith 👋</h1>
+    <p>AI Engineer in the making | B.Tech @ NITK | Explorer of cool tech + calm aesthetics</p>
+  </header>
+
+  <div class="controls">
+    <input type="text" id="searchInput" placeholder="Search projects..." oninput="searchProjects()">
+    <button onclick="toggleMusic()">🎵 Toggle Music</button>
+  </div>
+
+  <section class="projects" id="project-container"></section>
+
+  <footer>
+    <p>Contact: rohith@02aug@gmail.com | GitHub: <a href="https://github.com/JustCool0208" target="_blank" style="color:#9cf">@JustCool0208</a></p>
+  </footer>
+
+  <audio id="bg-music" loop>
+    <source src="calm-nature-sounds-196258.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000 });
+
+    const projects = [
+      {
+        title: "SpideySense",
+        description: "AI-powered safety system using object detection & alerts.",
+        thumbnail: "https://raw.githubusercontent.com/JustCool0208/SpideySense/main/demo.png",
+        tryLink: "https://github.com/JustCool0208/SpideySense",
+        readmeLink: "https://github.com/JustCool0208/SpideySense#readme"
+      },
+      {
+        title: "Friday v2",
+        description: "Voice AI assistant powered by Whisper, Gemini & TTS.",
+        thumbnail: "https://raw.githubusercontent.com/JustCool0208/friday_v2/main/demo.png",
+        tryLink: "https://github.com/JustCool0208/friday_v2",
+        readmeLink: "https://github.com/JustCool0208/friday_v2#readme"
+      },
+      {
+        title: "Digit Classifier",
+        description: "MNIST digit classification using CNNs.",
+        thumbnail: "https://raw.githubusercontent.com/JustCool0208/digit/main/demo.png",
+        tryLink: "https://github.com/JustCool0208/digit",
+        readmeLink: "https://github.com/JustCool0208/digit#readme"
+      },
+      {
+        title: "Sound Vision",
+        description: "Emotion-based image generation using voice input.",
+        thumbnail: "https://raw.githubusercontent.com/JustCool0208/soundvision/main/demo.png",
+        tryLink: "https://github.com/JustCool0208/soundvision",
+        readmeLink: "https://github.com/JustCool0208/soundvision#readme"
+      }
+    ];
+
+    const container = document.getElementById("project-container");
+
+    function renderProjects(filteredProjects = projects) {
+      container.innerHTML = '';
+      filteredProjects.forEach(({title, description, thumbnail, tryLink, readmeLink}) => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.setAttribute("data-aos", "zoom-in-up");
+        card.innerHTML = `
+          <img src="${thumbnail}" alt="${title} Thumbnail">
+          <h3>${title}</h3>
+          <p>${description}</p>
+          <div class="buttons">
+            <a href="${tryLink}" target="_blank"><i class="fas fa-play"></i> Try it</a>
+            <a href="${readmeLink}" target="_blank"><i class="fas fa-book"></i> README</a>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+      AOS.refresh();
+    }
+
+    function searchProjects() {
+      const query = document.getElementById("searchInput").value.toLowerCase();
+      const filtered = projects.filter(p =>
+        p.title.toLowerCase().includes(query) ||
+        p.description.toLowerCase().includes(query)
+      );
+      renderProjects(filtered);
+    }
+
+    function toggleMusic() {
+      const music = document.getElementById('bg-music');
+      if (music.paused) music.play();
+      else music.pause();
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('dark-mode');
+    }
+
+    renderProjects();
+  </script>
+</body>
+</html>

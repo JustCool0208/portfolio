@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rohith's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+    html, body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    body {
+      position: relative;
+      color: #f5f5f5;
+      padding: 2rem;
+      background-color: #111;
+    }
+    .bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+      filter: brightness(0.4) contrast(1.1);
+    }
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(90deg, #c2e9fb, #a1c4fd);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientFlow 8s ease infinite alternate;
+    }
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+    .typing-effect {
+      font-size: 2.5rem;
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid white;
+      width: 0;
+      animation: typing 2.5s steps(20, end) forwards, blink 0.75s step-end infinite;
+      background: linear-gradient(to right, #55f788, #0b865b, #a0f43f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink {
+      0%, 100% { border-color: transparent }
+      50% { border-color: white }
+    }
+    header p {
+      font-size: 1.25rem;
+      color: #f0f0f0;
+      font-weight: 300;
+      text-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+    }
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .controls input[type="text"] {
+      padding: 0.5rem 1rem;
+      width: 250px;
+      border-radius: 5px;
+      border: 1px solid #555;
+      background: #222;
+      color: #fff;
+    }
+    .controls button {
+      padding: 0.5rem 1rem;
+      background-color: #333;
+      color: #fff;
+      border: 1px solid #555;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .controls button:hover {
+      background-color: #555;
+    }
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #333;
+      border: none;
+      padding: 0.6rem 1rem;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      width: 100%;
+    }
+    #project-container {
+      width: 100%;
+      overflow: visible;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 1.2rem;
+      padding: 1.2rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(10px);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 30px rgba(0,0,0,0.5);
+    }
+    .card img {
+      border-radius: 1rem;
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+    .card h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.4rem;
+      color: #ffffff;
+    }
+    .card p {
+      font-size: 0.95rem;
+      color: #dddddd;
+      margin-bottom: 1rem;
+    }
+    .buttons {
+      display: flex;
+      gap: 0.6rem;
+    }
+    .buttons a {
+      flex: 1;
+      text-align: center;
+      text-decoration: none;
+      background: #66bb6a;
+      color: white;
+      padding: 0.6rem;
+      border-radius: 0.5rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .buttons a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 12px rgba(0,0,0,0.4);
+    }
+        .tech-stack {
+      display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+      padding: 1rem 0;
+      margin-bottom: 1.5rem;
+      scrollbar-width: none;
+      
+    }
+    .tech-stack::-webkit-scrollbar {
+      display: none;
+    }
+    .tech-icon {
+      flex: 0 0 auto;
+      background: #1f1f1f;
+      color: #55f788;
+      padding: 0.6rem 1rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      white-space: nowrap;
+      border: 1px solid #55f788;
+    }
+    footer {
+      margin-top: 4rem;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <video autoplay muted loop playsinline class="bg-video">
+    <source src="VIDEO\216134_tiny.mp4" type="video/mp4">
+  </video>
+
+
+  <header data-aos="fade-down">
+    <h1 class="typing-effect">Hey, I'm Rohith 👋</h1>
+    <p>AI Engineer in the making | B.Tech @ NITK | Explorer of cool tech + calm aesthetics</p>
+  </header>
+ 
+  <div class="controls">
+    <input type="text" id="searchInput" placeholder="Search projects..." oninput="searchProjects()">
+    <button onclick="toggleMusic()">🎵 Toggle Music</button>
+  </div>
+
+  <section class="projects" id="project-container"></section>
+
+  <footer>
+    <p>Contact: rohith@02aug@gmail.com | GitHub: <a href="https://github.com/JustCool0208" target="_blank" style="color:#9cf">@JustCool0208</a></p>
+  </footer>
+
+  <audio id="bg-music" loop>
+    <source src="AUDIO/calm-nature-sounds-196258.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000 });
+
+   
+    const projects = [
+      {
+        title: "🕷️ SpideySense-Your AI-Powered Vision Assistant",
+        description: "AI-powered safety system using object detection & SpideySense is a real-time personal safety and perception assistant that helps you stay aware of your surroundings using computer vision, audio alerts, and AI voice interaction.",
+        thumbnail: "Thumbnails/Copilot_20250625_150837.png",
+        tryLink: "https://github.com/JustCool0208/SpideySense",
+        readmeLink: "https://github.com/JustCool0208/SpideySense#readme"
+      },
+      {
+        title: "🤖 FRIDAY v2 – My Voice-Only AI Assistant",
+        description: "FRIDAY is a voice-first AI assistant that listens, thinks, and speaks like a real assistant — no clicks, no screens. Just talk. Inspired by JARVIS. Built by ME !! :)",
+        thumbnail: "Thumbnails/fv.png",
+        tryLink: "https://github.com/JustCool0208/friday_v2",
+        readmeLink: "https://github.com/JustCool0208/friday_v2#readme"
+      },
+      
+      {
+        title: "SoundVision 🎧🎭🎨",
+        description: "SoundVision is a multimodal AI system that takes voice input, detects the underlying emotion, and generates a matching image using AI.",
+        thumbnail: "Thumbnails/sv.png",
+        tryLink: "https://github.com/JustCool0208/soundvision",
+        readmeLink: "https://github.com/JustCool0208/soundvision#readme"
+      },
+      {
+        title: "🎨 Neural Style Transfer App",
+        description: "Transform any photo into artwork using deep learning and style transfer!",
+        thumbnail: "Thumbnails/457904635-628f8e05-3611-4055-95d8-321b33d698b9.png",
+        tryLink: "https://github.com/JustCool0208/NST",
+        readmeLink: "https://github.com/JustCool0208/NST#"
+      },
+      {
+        title: "🕶️Pose Glasses",
+        description: "A fun real-time computer vision project that overlays spectacles on your eyes using PoseNet. HIT THE TRY LINK BELOW !!👇",
+        thumbnail: "Thumbnails/457911633-e2a49d50-5648-4cdc-8a84-418157d2cb90.png",
+        tryLink: "https://justcool0208.github.io/pose-glasses/",
+        readmeLink: "https://github.com/JustCool0208/pose-glasses/blob/main/README.md"
+      },
+      {
+        title: "Text Emotion Recognition using Deep Learning",
+        description: "A Deep Learning-based emotion recognition system built with TensorFlow and deployed using Streamlit. It takes text inputs to predict emotions using specialized neural networks",
+        thumbnail: "Thumbnails/ew.png",
+        tryLink: "https://github.com/JustCool0208/GloVe-BiLSTM",
+        readmeLink: "https://github.com/JustCool0208/GloVe-BiLSTM#readme"
+      },
+      {
+        title: "📄 AI Resume Parser",
+        description: "An AI-powered tool to automatically extract key information from resumes using Python, spaCy, and Streamlit.",
+        thumbnail: "Thumbnails/air.png",
+        tryLink: "https://github.com/JustCool0208/spacy",
+        readmeLink: "https://github.com/JustCool0208/spacy#readme"
+      },
+      {
+        title: "Health Risk Predictor",
+        description: "This is a Health Prediction API that uses Machine Learning to assess the risk of cardiac arrest based on user health data. It allows users to submit their health data, receive AI-based risk assessments, and view analytics on an admin dashboard.",
+        thumbnail: "Thumbnails/api.png",
+        tryLink: "https://github.com/JustCool0208/health-risk-predictor-clean-",
+        readmeLink: "https://github.com/JustCool0208/health-risk-predictor-clean-#readme"
+      },
+      {
+        title: "📩 Spam Classifier",
+        description: "A simple Email/SMS Spam classifier built from scratch.",
+        thumbnail: "Thumbnails/images.png",
+        tryLink: "https://github.com/JustCool0208/spam-classifier",
+        readmeLink: "https://github.com/JustCool0208/spam-classifier#readme"
+      },
+      {
+        title: "Digit Classifier",
+        description: "MNIST digit classification using CNNs.",
+        thumbnail: "Thumbnails/digi.png",
+        tryLink: "https://github.com/JustCool0208/digit",
+        readmeLink: "https://github.com/JustCool0208/digit#readme"
+      },
+    ];
+
+    const container = document.getElementById("project-container");
+
+    function renderProjects(filteredProjects = projects) {
+      container.innerHTML = '';
+      filteredProjects.forEach(({title, description, thumbnail, tryLink, readmeLink}) => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.setAttribute("data-aos", "zoom-in-up");
+        card.innerHTML = `
+          <img src="${thumbnail}" alt="${title} Thumbnail">
+          <h3>${title}</h3>
+          <p>${description}</p>
+          <div class="buttons">
+            <a href="${tryLink}" target="_blank"><i class="fas fa-play"></i> Try it</a>
+            <a href="${readmeLink}" target="_blank"><i class="fas fa-book"></i> README</a>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+      AOS.refresh();
+    }
+
+    function searchProjects() {
+      const query = document.getElementById("searchInput").value.toLowerCase();
+      const filtered = projects.filter(p =>
+        p.title.toLowerCase().includes(query) ||
+        p.description.toLowerCase().includes(query)
+      );
+      renderProjects(filtered);
+    }
+
+    function toggleMusic() {
+      const music = document.getElementById('bg-music');
+      if (music.paused) music.play();
+      else music.pause();
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('dark-mode');
+    }
+
+    renderProjects();
+  </script>
+</body>
+</html>
